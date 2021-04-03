@@ -15,7 +15,7 @@ def get_help():
   `grandma info` : Basic info about the bot 
   `grandma inspire` : Grandma will tell you a motivational quote 
   `grandma poem`    : Grandma will tell you a random poem 
-  `grandma poem number` : Grandma will tell you a random poem with lines equal to linecount,linecount should be a number between 1 to 30
+  `grandma poem number` : Grandma will tell you a random poem with lines equal to number and number should be a number between 1 to 30
   `grandma jokes` : Grandma will tell you a random joke
   `grandma pjokes` : Grandma will tell you a random programming joke
 
@@ -82,6 +82,7 @@ def get_joke(flag):
 @client.event
 async def on_ready():
       print("{0.user} is live!!".format(client))
+      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for grandma help"))
 
 
 @client.event
