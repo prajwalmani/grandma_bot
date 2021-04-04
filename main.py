@@ -3,6 +3,7 @@ import os
 import requests
 import json
 import random
+import praw
 from abuse import get_abuser
 from keep_alive import keep_alive
 
@@ -14,6 +15,9 @@ def get_help():
   
   **Commands**
   `Prefix` : **grandma**
+  `grandma meme` : Grandma will show you are random meme
+  `grandma wmeme` : Grandma will show you are random wholesomememes
+  `grandma ameme` : Grandma will doggo?catto meme
   `grandma info` : Basic info about the bot 
   `grandma inspire` : Grandma will tell you a motivational quote 
   `grandma poem`    : Grandma will tell you a random poem within 20 lines
@@ -25,12 +29,44 @@ def get_help():
   return help
 
 def get_info():
-  info='''
-  Gradma bot is loving and cool as your grandma!
+  emb=discord.Embed()
+  emb.description='''
+  **Gradma bot is loving and cool just like your grandma!
   This bot was built in python 
   By : `Prajwal Mani` 
+  [HERE IS THE GITHUB REPO.](https://github.com/prajwalmani/grandma_bot)
+  Have some suggestions or want to help me out to build still more bigger bot then do a PR for the repo and let me know!**
   '''
-  return info
+  return emb
+
+def get_reddit(subreddit_name):
+
+  reddit=praw.Reddit(
+    client_id=os.getenv('CLIENT_ID'),
+    client_secret=os.getenv('SECRET_KEY'),
+    username=os.getenv('username'),
+    user_agent=os.getenv('user_agent'),
+    check_for_async=False
+  )
+
+  subreddit=reddit.subreddit(subreddit_name)
+
+  top=subreddit.top(limit=50)
+  allsubs=[]
+  for submissions in top:
+    allsubs.append(submissions)
+  
+  random_sub=random.choice(allsubs)
+
+  title=random_sub.title
+  url=random_sub.url
+
+  emb=discord.Embed(title=title)
+
+  emb.set_image(url=url)
+  
+  return emb
+
 def get_quote():
       # a function to generate random quotes using API
       qresponse = requests.get("https://zenquotes.io/api/random")
@@ -93,7 +129,7 @@ async def on_message(message):
           await message.channel.send(help)
       if message.content.startswith('grandma info'):
           info=get_info()
-          await message.channel.send(info)
+          await message.channel.send(embed=info)
       if message.content.startswith('grandma inspire'):
           quote = get_quote()
           await message.channel.send(quote)
@@ -110,6 +146,15 @@ async def on_message(message):
       if message.content.startswith('grandma abuse'):
           abuse = get_abuser()
           await message.channel.send(abuse)
+      if message.content.startswith('grandma meme'):
+          emb = get_reddit("memes")
+          await message.channel.send(embed=emb)
+      if message.content.startswith('grandma wmeme'):
+          emb = get_reddit("wholesomememes")
+          await message.channel.send(embed=emb)
+      if message.content.startswith('grandma ameme'):
+          emb = get_reddit("AnimalMemes")
+          await message.channel.send(embed=emb)
 
 keep_alive()
 
