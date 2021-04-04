@@ -3,6 +3,7 @@ import os
 import requests
 import json
 import random
+from abuse import get_abuser
 from keep_alive import keep_alive
 
 client = discord.Client()
@@ -16,6 +17,7 @@ def get_help():
   `grandma info` : Basic info about the bot 
   `grandma inspire` : Grandma will tell you a motivational quote 
   `grandma poem`    : Grandma will tell you a random poem within 20 lines
+  `grandma abuse` : Grandma will abuse you in a funny way
   `grandma jokes` : Grandma will tell you a random joke
   `grandma pjokes` : Grandma will tell you a random programming joke
 
@@ -105,9 +107,10 @@ async def on_message(message):
       if message.content.startswith('grandma pjokes'):
           joke = get_joke(1)
           await message.channel.send(joke)
-
+      if message.content.startswith('grandma abuse'):
+          abuse = get_abuser()
+          await message.channel.send(abuse)
 
 keep_alive()
-
 
 client.run(os.getenv('TOKEN'))
