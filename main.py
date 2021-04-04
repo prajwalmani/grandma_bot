@@ -2,6 +2,7 @@ import discord
 import os
 import requests
 import json
+import random
 from keep_alive import keep_alive
 
 client = discord.Client()
@@ -14,8 +15,7 @@ def get_help():
   `Prefix` : **grandma**
   `grandma info` : Basic info about the bot 
   `grandma inspire` : Grandma will tell you a motivational quote 
-  `grandma poem`    : Grandma will tell you a random poem 
-  `grandma poem number` : Grandma will tell you a random poem with lines equal to number and number should be a number between 1 to 30
+  `grandma poem`    : Grandma will tell you a random poem within 20 lines
   `grandma jokes` : Grandma will tell you a random joke
   `grandma pjokes` : Grandma will tell you a random programming joke
 
@@ -38,10 +38,7 @@ def get_quote():
 
 
 def get_poem(linescount):
-      if linescount == 0:
-          url = "https://poetrydb.org/random/1/title,author,lines.text"
-      else:
-          url = 'https://poetrydb.org/random,linecount/1;{0}/title,author,lines.text'.format(
+      url = 'https://poetrydb.org/random,linecount/1;{0}/title,author,lines.text'.format(
               linescount)
       presponse = requests.get(url)
       strg = presponse.text
@@ -99,11 +96,7 @@ async def on_message(message):
           quote = get_quote()
           await message.channel.send(quote)
       if message.content.startswith('grandma poem'):
-          msg = str(message.content)
-          if (any(chr.isdigit() for chr in msg)):
-              linescount = msg[13]
-          else:
-              linescount = 0
+          linescount = random.randrange(1, 21)
           poem = get_poem(linescount)
           await message.channel.send(poem)
       if message.content.startswith('grandma jokes'):
