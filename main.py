@@ -17,7 +17,7 @@ def get_help():
   `Prefix` : **grandma**
   `grandma meme` : Grandma will show you are random meme
   `grandma wmeme` : Grandma will show you are random wholesomememes
-  `grandma ameme` : Grandma will doggo?catto meme
+  `grandma ameme` : Grandma will doggo/catto meme
   `grandma info` : Basic info about the bot 
   `grandma inspire` : Grandma will tell you a motivational quote 
   `grandma poem`    : Grandma will tell you a random poem within 20 lines
