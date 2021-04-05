@@ -14,7 +14,7 @@ Have some suggestions or want to help me out to build still more bigger bot then
 ```
   g info : Basic info about the bot 
   g meme : Grandma will show you a random meme
-  g wmeme` : Grandma will show you a random wholesomememes
+  g wmeme` : Grandma will show you a random wholesome memes
   g ameme : Grandma will show you a random doggo/catto meme
   g food : Grandma will give some food 
   g money : If you need some cash then grandma is there for you 
