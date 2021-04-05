@@ -4,8 +4,10 @@
 </div>
 Gradma bot is loving and cool just like your grandma!<br>
 This bot was built in python<br>
-By : [Prajwal Mani] (https://linktr.ee/prajwal.mani)<br>
+By : [Prajwal Mani](https://linktr.ee/prajwal.mani)
 Have some suggestions or want to help me out to build still more bigger bot then do a PR and let me know!<br>
+
+## If you want to add the bot to your server then here is the bot invite link
 
 ## **Commands**
 **Prefix** : **g**
