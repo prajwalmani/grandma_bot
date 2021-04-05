@@ -15,9 +15,9 @@ def get_help():
   
   **Commands**
   `Prefix` : **grandma**
-  `grandma meme` : Grandma will show you are random meme
-  `grandma wmeme` : Grandma will show you are random wholesomememes
-  `grandma ameme` : Grandma will doggo/catto meme
+  `grandma meme` : Grandma will show you a random meme
+  `grandma wmeme` : Grandma will show you a random wholesomememes
+  `grandma ameme` : Grandma will show you a random doggo/catto meme
   `grandma info` : Basic info about the bot 
   `grandma inspire` : Grandma will tell you a motivational quote 
   `grandma poem`    : Grandma will tell you a random poem within 20 lines
@@ -26,10 +26,11 @@ def get_help():
   `grandma pjokes` : Grandma will tell you a random programming joke
 
   '''
-  return help
+  emb=discord.Embed(description=help, color=0xee82ee)
+  return emb
 
 def get_info():
-  emb=discord.Embed()
+  emb=discord.Embed(color=0x0000ff)
   emb.description='''
   **Gradma bot is loving and cool just like your grandma!
   This bot was built in python 
@@ -37,6 +38,7 @@ def get_info():
   [HERE IS THE GITHUB REPO.](https://github.com/prajwalmani/grandma_bot)
   Have some suggestions or want to help me out to build still more bigger bot then do a PR for the repo and let me know!**
   '''
+  
   return emb
 
 def get_reddit(subreddit_name):
@@ -61,7 +63,7 @@ def get_reddit(subreddit_name):
   title=random_sub.title
   url=random_sub.url
 
-  emb=discord.Embed(title=title)
+  emb=discord.Embed(title=title, color=0xff0000)
 
   emb.set_image(url=url)
   
@@ -111,8 +113,15 @@ def get_joke(flag):
           jokes_data = json.loads(jresponse.text)
           jokes_data = json.loads(jresponse.text)
           joke="{0}\n{1}".format(jokes_data[0]['setup'],jokes_data[0]['punchline'])
-          return joke 
-
+          return joke
+          
+def get_food():
+    title="Eat up I know you are hungry and you need energy"
+    # url="foodimages/food{0}.png".format(random.randrange(1, 21))
+    emb=discord.Embed(title=title, color=0x00ff00)
+    file = discord.File("foodimages/food{0}.png".format(random.randrange(1,21)), filename="image.png")
+    emb.set_image(url="attachment://image.png")
+    return file,emb
 
 @client.event
 async def on_ready():
@@ -126,7 +135,7 @@ async def on_message(message):
           pass
       if message.content.startswith('grandma help'):
           help=get_help()
-          await message.channel.send(help)
+          await message.channel.send(embed=help)
       if message.content.startswith('grandma info'):
           info=get_info()
           await message.channel.send(embed=info)
@@ -155,6 +164,9 @@ async def on_message(message):
       if message.content.startswith('grandma ameme'):
           emb = get_reddit("AnimalMemes")
           await message.channel.send(embed=emb)
+      if message.content.startswith('grandma food'):
+          file,emb = get_food()
+          await message.channel.send(file=file,embed=emb)
 
 keep_alive()
 
