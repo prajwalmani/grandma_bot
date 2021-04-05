@@ -16,7 +16,7 @@ def get_help():
   **Commands**
   `Prefix` : **g**
   `g info` : Basic info about the bot 
-  `get_abuser meme` : Grandma will show you a random meme
+  `g meme` : Grandma will show you a random meme
   `g wmeme` : Grandma will show you a random wholesomememes
   `g ameme` : Grandma will show you a random doggo/catto meme
   `g food` : Grandma will give some food 
