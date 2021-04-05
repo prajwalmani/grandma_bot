@@ -1,4 +1,4 @@
-import discord
+=import discord
 import os
 import requests
 import json
@@ -14,17 +14,20 @@ def get_help():
   Grandma is here to help you out because she is multitalented!
   
   **Commands**
-  `Prefix` : **grandma**
-  `grandma meme` : Grandma will show you a random meme
-  `grandma wmeme` : Grandma will show you a random wholesomememes
-  `grandma ameme` : Grandma will show you a random doggo/catto meme
-  `grandma info` : Basic info about the bot 
-  `grandma inspire` : Grandma will tell you a motivational quote 
-  `grandma poem`    : Grandma will tell you a random poem within 20 lines
-  `grandma abuse` : Grandma will abuse you in a funny way
-  `grandma jokes` : Grandma will tell you a random joke
-  `grandma pjokes` : Grandma will tell you a random programming joke
+  `Prefix` : **g**
+  `g info` : Basic info about the bot 
+  `get_abuser meme` : Grandma will show you a random meme
+  `g wmeme` : Grandma will show you a random wholesomememes
+  `g ameme` : Grandma will show you a random doggo/catto meme
+  `g food` : Grandma will give some food 
+  `g money` : If you need some cash then grandma is there for you 
+  `g inspire` : Grandma will tell you a motivational quote 
+  `g poem`    : Grandma will tell you a random poem within 20 lines
+  `g abuse` : Grandma will abuse you in a funny way
+  `g jokes` : Grandma will tell you a random joke
+  `g pjokes` : Grandma will tell you a random programming joke
 
+  **PS: Grandma says "I dont spoil my grandkids. I'm just very accmodating"**
   '''
   emb=discord.Embed(description=help, color=0xee82ee)
   return emb
@@ -116,12 +119,25 @@ def get_joke(flag):
           return joke
           
 def get_food():
-    title="Eat up I know you are hungry and you need energy"
-    # url="foodimages/food{0}.png".format(random.randrange(1, 21))
-    emb=discord.Embed(title=title, color=0x00ff00)
+    title=["Eat up I know you are hungry",
+          "You gonna stop eating when i tell you to stop eating",
+          "If nothing is going well...maybe this food can cure it",
+          "While your here, grab some food and charge up"
+    ]
+    emb=discord.Embed(title=title[random.randrange(0,4)], color=0x00ff00)
     file = discord.File("foodimages/food{0}.png".format(random.randrange(1,21)), filename="image.png")
     emb.set_image(url="attachment://image.png")
     return file,emb
+
+def get_money():
+  list=[
+    'Here is some cash \U0001F4B0 buy what ever you want',
+    'Dont tell anybody that I gave you the cash \U0001F4B0',
+    'Here you go \U0001F4B0 buy something to eat '
+  ]
+
+  return list[random.randrange(0,3)]
+
 
 @client.event
 async def on_ready():
@@ -133,40 +149,43 @@ async def on_ready():
 async def on_message(message):
       if message.author == client.user:
           pass
-      if message.content.startswith('grandma help'):
+      if message.content.startswith('g help'):
           help=get_help()
           await message.channel.send(embed=help)
-      if message.content.startswith('grandma info'):
+      if message.content.startswith('g info'):
           info=get_info()
           await message.channel.send(embed=info)
-      if message.content.startswith('grandma inspire'):
+      if message.content.startswith('g inspire'):
           quote = get_quote()
           await message.channel.send(quote)
-      if message.content.startswith('grandma poem'):
+      if message.content.startswith('g poem'):
           linescount = random.randrange(1, 21)
           poem = get_poem(linescount)
           await message.channel.send(poem)
-      if message.content.startswith('grandma jokes'):
+      if message.content.startswith('g jokes'):
           joke = get_joke(0)
           await message.channel.send(joke)
-      if message.content.startswith('grandma pjokes'):
+      if message.content.startswith('g pjokes'):
           joke = get_joke(1)
           await message.channel.send(joke)
-      if message.content.startswith('grandma abuse'):
+      if message.content.startswith('g abuse'):
           abuse = get_abuser()
           await message.channel.send(abuse)
-      if message.content.startswith('grandma meme'):
+      if message.content.startswith('g meme'):
           emb = get_reddit("memes")
           await message.channel.send(embed=emb)
-      if message.content.startswith('grandma wmeme'):
+      if message.content.startswith('g wmeme'):
           emb = get_reddit("wholesomememes")
           await message.channel.send(embed=emb)
-      if message.content.startswith('grandma ameme'):
+      if message.content.startswith('g ameme'):
           emb = get_reddit("AnimalMemes")
           await message.channel.send(embed=emb)
-      if message.content.startswith('grandma food'):
+      if message.content.startswith('g food'):
           file,emb = get_food()
           await message.channel.send(file=file,embed=emb)
+      if message.content.startswith('g money'):
+          money = get_money()
+          await message.channel.send(money)
 
 keep_alive()
 
