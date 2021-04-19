@@ -142,7 +142,7 @@ def get_money():
 @client.event
 async def on_ready():
       print("{0.user} is live!!".format(client))
-      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for grandma help"))
+      await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for g help"))
 
 
 @client.event
