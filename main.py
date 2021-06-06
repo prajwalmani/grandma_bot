@@ -1,4 +1,4 @@
-=import discord
+import discord
 import os
 import requests
 import json
@@ -17,10 +17,11 @@ def get_help():
   `Prefix` : **g**
   `g info` : Basic info about the bot 
   `g meme` : Grandma will show you a random meme
-  `g wmeme` : Grandma will show you a random wholesomememes
+  `g wmeme` : Grandma will show you a random wholesome memes
   `g ameme` : Grandma will show you a random doggo/catto meme
   `g food` : Grandma will give some food 
-  `g money` : If you need some cash then grandma is there for you 
+  `g money` : If you need some cash then grandma is there for you
+  `g math`  : Let grandma help you with math!
   `g inspire` : Grandma will tell you a motivational quote 
   `g poem`    : Grandma will tell you a random poem within 20 lines
   `g abuse` : Grandma will abuse you in a funny way
@@ -186,6 +187,11 @@ async def on_message(message):
       if message.content.startswith('g money'):
           money = get_money()
           await message.channel.send(money)
+      if message.content.startswith('g math'):
+          msg=str(message.content)
+          msgs=msg.replace("g math"," ")
+          ans=eval(msgs)
+          await message.channel.send("Grandma answer is **{0}**!".format(ans))
 
 keep_alive()
 
