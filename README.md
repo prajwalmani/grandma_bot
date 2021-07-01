@@ -25,7 +25,7 @@ Have some suggestions or want to help me out to build still more bigger bot then
   g jokes : Grandma will tell you a random joke
   g pjokes : Grandma will tell you a random programming joke
 
-  **PS: Grandma says "I dont spoil my grandkids. I'm just very accmodating"**
+  **PS: Grandma says "I dont spoil my grandkids. I'm just very accommodating"**
 ```
 ## Checkout the demo video on [Youtube.](https://youtu.be/M-aPnkiwlAI)
 ### Thank you for checking out the repo!
