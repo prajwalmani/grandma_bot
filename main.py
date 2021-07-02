@@ -27,8 +27,9 @@ def get_help():
   `g abuse` : Grandma will abuse you in a funny way
   `g jokes` : Grandma will tell you a random joke
   `g pjokes` : Grandma will tell you a random programming joke
-
-  **PS: Grandma says "I dont spoil my grandkids. I'm just very accmodating"**
+  `g djokes` : Grandma will tell you a random dad joke
+  `g dogtrans` : Grandma will help you to talk with dogs 
+  **PS: Grandma says "I dont spoil my grandkids. I'm just very accommodating"**
   '''
   emb=discord.Embed(description=help, color=0xee82ee)
   return emb
@@ -115,7 +116,6 @@ def get_joke(flag):
           url = "https://official-joke-api.appspot.com/jokes/programming/random"
           jresponse = requests.get(url)
           jokes_data = json.loads(jresponse.text)
-          jokes_data = json.loads(jresponse.text)
           joke="{0}\n{1}".format(jokes_data[0]['setup'],jokes_data[0]['punchline'])
           return joke
           
@@ -138,6 +138,20 @@ def get_money():
   ]
 
   return list[random.randrange(0,3)]
+
+def get_dogtrans(msg):
+  url="https://api.funtranslations.com/translate/doge.json?text={0}".format(msg)
+  jsonresponse=requests.get(url)
+  json_res_text=json.loads(jsonresponse.text)
+  return str(json_res_text["contents"]['translated'])
+
+def get_dadjokes():
+  url="https://us-central1-dadsofunny.cloudfunctions.net/DadJokes/random/jokes"
+  jsondadresponse=requests.get(url)
+  jsondadtextresponse=json.loads(jsondadresponse.text)
+  dadjokes="{0}\n{1}".format(jsondadtextresponse['setup'],jsondadtextresponse['punchline'])
+  return str(dadjokes)
+
 
 
 @client.event
@@ -169,6 +183,9 @@ async def on_message(message):
       if message.content.startswith('g pjokes'):
           joke = get_joke(1)
           await message.channel.send(joke)
+      if message.content.startswith('g djokes'):
+          joke = get_dadjokes()
+          await message.channel.send(joke)
       if message.content.startswith('g abuse'):
           abuse = get_abuser()
           await message.channel.send(abuse)
@@ -192,6 +209,11 @@ async def on_message(message):
           msgs=msg.replace("g math"," ")
           ans=eval(msgs)
           await message.channel.send("Grandma answer is **{0}**!".format(ans))
+      if message.content.startswith('g dogtrans'):
+        msg=str(message.content)[10:]
+        translated_msg=get_dogtrans(msg)
+        await message.delete()
+        await message.channel.send(translated_msg)
 
 keep_alive()
 
