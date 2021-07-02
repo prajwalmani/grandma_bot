@@ -14,7 +14,7 @@ Have some suggestions or want to help me out to build still more bigger bot then
 ```
   g info : Basic info about the bot 
   g meme : Grandma will show you a random meme
-  g wmeme` : Grandma will show you a random wholesome memes
+  g wmeme : Grandma will show you a random wholesome memes
   g ameme : Grandma will show you a random doggo/catto meme
   g food : Grandma will give some food 
   g money : If you need some cash then grandma is there for you 
@@ -24,6 +24,8 @@ Have some suggestions or want to help me out to build still more bigger bot then
   g abuse : Grandma will abuse you in a funny way
   g jokes : Grandma will tell you a random joke
   g pjokes : Grandma will tell you a random programming joke
+  g djokes : Grandma will tell you a random dad joke
+  g dogtrans : Grandma will help you to talk with dogs 
 
   **PS: Grandma says "I dont spoil my grandkids. I'm just very accommodating"**
 ```
