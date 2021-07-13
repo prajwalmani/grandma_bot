@@ -58,9 +58,9 @@ def get_reddit(subreddit_name):
 
   subreddit=reddit.subreddit(subreddit_name)
 
-  top=subreddit.top(limit=50)
+  hot=subreddit.hot(limit=50)
   allsubs=[]
-  for submissions in top:
+  for submissions in hot:
     allsubs.append(submissions)
   
   random_sub=random.choice(allsubs)
